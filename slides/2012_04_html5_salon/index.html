@@ -36,7 +36,7 @@
         <q>二逼名字：<b class="scaling">齐b小舞蹈</b></q>
     </div>
 
-    <div id="teamMember" class="step slide" data-x="1000" data-y="-1500">
+    <div id="teamMember" class="step slide" data-x="0" data-y="-1500">
         <h1>团队介绍 - FD</h1>
         <br/>
 
@@ -45,8 +45,8 @@
         <img id="team-photo" width='500px' src='images/team-photo.jpg'/>
     </div>
 
-    <div id="its" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
-        <p>It's a <strong>presentation tool</strong> <br/>
+    <div id="concept" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
+        <p><strong>游戏概念</strong> <br/>
             inspired by the idea behind <a href="http://prezi.com">prezi.com</a> <br/>
             and based on the <strong>power of CSS3 transforms and transitions</strong> in modern browsers.</p>
     </div>
@@ -98,14 +98,9 @@
 
     <p style='font-size: 36px;'>试玩地址: <a href="http://shouzhiwu.sinaapp.com">http://shouzhiwu.sinaapp.com</a></p>
 </div>
-<script>
-    if ("ontouchstart" in document.documentElement) {
-        document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
-    }
-</script>
 
 <script src="impress.js"></script>
-<script>impress();</script>
+<script>impress().init();</script>
 
 </body>
 </html>
