@@ -327,41 +327,23 @@ a:focus {
     transition-delay: 0.5s;
 }
 
-#team-photo {
+.centerImage {
     margin: 0 auto;
     display: block;
+}
+
+#team-photo {
     width: 500px;
 }
 
-#title {
-    padding: 0;
+#concept {
+    background-image: url("images/dance_machine.jpg");
+    background-position: bottom right;
+    background-repeat: no-repeat;
 }
 
-#title .try {
-    font-size: 64px;
-    position: absolute;
-    top: -0.5em;
-    left: 1.5em;
-
-    -webkit-transform: translateZ(20px);
-    -moz-transform: translateZ(20px);
-    -ms-transform: translateZ(20px);
-    -o-transform: translateZ(20px);
-    transform: translateZ(20px);
-}
-
-#title h1 {
-    font-size: 190px;
-
-    -webkit-transform: translateZ(50px);
-    -moz-transform: translateZ(50px);
-    -ms-transform: translateZ(50px);
-    -o-transform: translateZ(50px);
-    transform: translateZ(50px);
-}
-
-#title .footnote {
-    font-size: 32px;
+#ui_design {
+    width: 700px;
 }
 
 /*
@@ -379,7 +361,7 @@ a:focus {
 
 #big b {
     display: block;
-    font-size: 250px;
+    font-size: 200px;
     line-height: 250px;
 }
 
@@ -408,16 +390,6 @@ a:focus {
     font-size: 78px;
 }
 
-/*
-    There is nothing really special about 'use the source, Luke' step, too,
-    except maybe of the Yoda background.
-    
-    As you can see below I've 'hard-coded' it in data URL.
-    That's not the best way to serve images, but because that's just this one
-    I decided it will be OK to have it this way.
-    
-    Just make sure you don't blindly copy this approach.
-*/
 #source {
     width: 700px;
     padding-bottom: 300px;
