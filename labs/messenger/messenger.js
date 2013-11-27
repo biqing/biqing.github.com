@@ -57,9 +57,9 @@ window.Messenger = (function(){
     function Messenger(name){
         this.targets = {};
         this.name = name;
+        this.listenFunc = [];
+        this.initListen();
     }
-
-    Messenger.listenFunc = [];
 
     // 添加一个消息对象
     Messenger.prototype.addTarget = function(target, name){
@@ -67,31 +67,35 @@ window.Messenger = (function(){
         this.targets[name] = targetObj;
     };
 
-    var generalCallback = function(msg){
-        if(typeof msg == 'object' && msg.data){
-            msg = msg.data;
-        }
-        // 剥离消息前缀
-        msg = msg.slice(prefix.length);
-        for(var i = 0; i < Messenger.listenFunc.length; i++){
-            Messenger.listenFunc[i](msg);
+    // 初始化消息监听
+    Messenger.prototype.initListen = function(){
+        var self = this;
+        var generalCallback = function(msg){
+            if(typeof msg == 'object' && msg.data){
+                msg = msg.data;
+            }
+            // 剥离消息前缀
+            msg = msg.slice(prefix.length);
+            for(var i = 0; i < self.listenFunc.length; i++){
+                self.listenFunc[i](msg);
+            }
+        };
+
+        if ( supportPostMessage ){
+            if ( 'addEventListener' in document ) {
+                window.addEventListener('message', generalCallback, false);
+            } else if ( 'attachEvent' in document ) {
+                window.attachEvent('onmessage', generalCallback);
+            }
+        } else {
+            // 兼容IE 6/7
+            window.navigator[prefix + this.name] = generalCallback;
         }
     };
 
-    if ( supportPostMessage ){
-        if ( 'addEventListener' in document ) {
-            window.addEventListener('message', generalCallback, false);
-        } else if ( 'attachEvent' in document ) {
-            window.attachEvent('onmessage', generalCallback);
-        }
-    } else {
-        // 兼容IE 6/7
-        window.navigator[prefix + this.name] = generalCallback;
-    }
-
     // 监听消息
     Messenger.prototype.listen = function(callback){
-        Messenger.listenFunc.push(callback);
+        this.listenFunc.push(callback);
     };
 
     // 广播消息
