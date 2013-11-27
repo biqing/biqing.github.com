@@ -36,8 +36,8 @@
 
         function sendMessage() {
             var message = document.getElementById('message');
-            messenger.send(message.value);
-            // messenger.targets['iframe'].send(message.value);
+            // messenger.send(message.value);
+            messenger.targets['iframe'].send(message.value);
             message.value = '';
         }
     </script>

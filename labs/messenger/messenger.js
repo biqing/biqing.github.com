@@ -43,8 +43,8 @@ window.Messenger = (function(){
         };
     } else {
         // 兼容IE 6/7
-        var targetFunc = window.navigator[prefix + this.name];
         Target.prototype.send = function(msg){
+            var targetFunc = window.navigator[prefix + this.name];
             if ( typeof targetFunc == 'function' ) {
                 targetFunc(prefix + msg, window);
             } else {
