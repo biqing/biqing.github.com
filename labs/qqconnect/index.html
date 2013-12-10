@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta property="qc:admins" content="131276424116767140526177" />
+    <style type="text/css">
+    #mask {
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: #000;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+    #login_iframe {
+        position: absolute;
+        left: 35%;
+        top: 20%;
+        border: none;
+        z-index: 10;
+    }
+    </style>
+</head>
+<body>
+    <h1>Hello, everyone!</h1>
+    <p>欢迎围观</p>
+    <p>access_token: <span id="access_token"></span></p>
+    <a href="javascript:showPopup();">打开QQ登录浮层</a><br/>
+
+    <a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_likeurl" target="_blank">赞</a><script  src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20110603&style=3&showcount=1&width=130&height=30" charset="utf-8" defer="defer" ></script>
+
+    <div id="mask"></div>
+    <script type="text/javascript">
+        var getCookie = function(name) {
+            var r = new RegExp('(?:^|;+|\\s+)' + name + '=([^;]*)'),
+                m = document.cookie.match(r);
+            return (!m ? '' : m[1]);
+        };
+
+        var setCookie = function(name, value, domain, path, hour){
+            if (hour) {
+                var expire = new Date();
+                expire.setTime(expire.getTime() + 3600000 * hour);
+            }
+            document.cookie = name + "=" + value + "; " + (hour ? ("expires=" + expire.toGMTString() + "; ") : "") + (path ? ("path=" + path + "; ") : "path=/; ") + (domain ? ("domain=" + domain + ";") : ("domain=" + Q.cookiedomainPrefix + ";"));
+            return true;
+        };
+
+        var showPopup = function(){
+            var iframe = document.createElement("iframe");
+            iframe.id = "login_iframe";
+            iframe.width = "433px";
+            iframe.height = "387px";
+            iframe.src = "http://openapi.qzone.qq.com/oauth/show?which=Login&display=pc&auth_time=&page_type=&client_id=100352117&redirect_uri=http%3A%2F%2Fbiqing.github.io%2Flabs%2Fqqconnect%2Fqc_back.html&scope=all&response_type=token&hide_auth_items=1"
+            document.body.appendChild(iframe);
+            document.getElementById("mask").style.display = "block";
+        };
+
+        var onSuccess = function(hash){
+            document.getElementById("login_iframe").remove();
+            document.getElementById("mask").style.display = "none";
+
+            var hash = hash.slice(1).split("&"),
+                ac = '';
+            for(var i = hash.length; i--; ){
+                if(hash[i].indexOf("access_token") != -1){
+                    hash = hash[i].split("=");
+                    ac = hash[1];
+                    break;
+                }
+            }
+            document.getElementById("access_token").innerHTML = ac;
+            setCookie("ac", ac, 'biqing.github.io', '/', 24);
+        };
+
+        var init = function(){
+            var ac = getCookie("ac");
+            if(ac){
+                document.getElementById("access_token").innerHTML = ac;
+            } else {
+                document.getElementById("access_token").innerHTML = "未登录, 或授权已过期";
+            }
+        };
+
+        init();
+    </script>
+</body>
+</html>
