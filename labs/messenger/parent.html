@@ -59,7 +59,7 @@
 
     function sendAll() {
         var msg = input.value;
-        messenger.send(message.value);
+        messenger.send("message from parent: " + msg);
         input.value = '';
     }
 
