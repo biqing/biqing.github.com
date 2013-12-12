@@ -26,7 +26,7 @@
 </head>
 <body>
     <h1>Hello, everyone!</h1>
-    <p>欢迎围观</p>
+    <p>互联浮层登录demo</p>
     <p>access_token: <span id="access_token"></span></p>
     <a href="javascript:showPopup();">打开QQ登录浮层</a><br/>
 
@@ -52,7 +52,11 @@
             iframe.id = "login_iframe";
             iframe.width = "433px";
             iframe.height = "387px";
-            iframe.src = "http://openapi.qzone.qq.com/oauth/show?which=Login&display=pc&auth_time=&page_type=&client_id=100352117&redirect_uri=http%3A%2F%2Fbiqing.github.io%2Flabs%2Fqqconnect%2Fqc_back.html&scope=all&response_type=token&show_auth_items=0"
+
+            var appid = 100352117,
+                redirect_uri = "http://biqing.github.io/labs/qqconnect/qc_back.html";
+
+            iframe.src = "http://openapi.qzone.qq.com/oauth/show?which=Login&display=pc&auth_time=&page_type=&client_id=" + appid + "&redirect_uri=" + encodeURIComponent(redirect_uri) + "&scope=all&response_type=token&show_auth_items=0";
             document.body.appendChild(iframe);
             document.getElementById("mask").style.display = "block";
         };
