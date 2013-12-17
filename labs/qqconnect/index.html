@@ -27,7 +27,7 @@
 <body>
     <h1>Hello, everyone!</h1>
     <p>互联浮层登录demo</p>
-    <p>access_token: <span id="access_token"></span></p>
+    <p>code: <span id="code"></span></p>
     <a href="javascript:showPopup();">打开QQ登录浮层</a><br/>
 
     <div id="mask"></div>
@@ -56,35 +56,31 @@
             var appid = 100352117,
                 redirect_uri = "http://biqing.github.io/labs/qqconnect/qc_back.html";
 
-            iframe.src = "http://openapi.qzone.qq.com/oauth/show?which=Login&display=pc&auth_time=&page_type=&client_id=" + appid + "&redirect_uri=" + encodeURIComponent(redirect_uri) + "&scope=all&response_type=token&show_auth_items=0";
+            iframe.src = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=" + appid + "&redirect_uri=" + encodeURIComponent(redirect_uri) + "&scope=all&show_auth_items=0";
             document.body.appendChild(iframe);
             document.getElementById("mask").style.display = "block";
         };
 
-        var onSuccess = function(hash){
+        var onSuccess = function(search){
             var iframe = document.getElementById("login_iframe");
             iframe.parentNode.removeChild( iframe );;
             document.getElementById("mask").style.display = "none";
 
-            var hash = hash.slice(1).split("&"),
-                ac = '';
-            for(var i = hash.length; i--; ){
-                if(hash[i].indexOf("access_token") != -1){
-                    hash = hash[i].split("=");
-                    ac = hash[1];
-                    break;
-                }
-            }
-            document.getElementById("access_token").innerHTML = ac;
-            setCookie("ac", ac, 'biqing.github.io', '/', 24);
+            var search = search.slice(1),
+                code = '';
+            search = search.split("=");
+            code = search[1];
+
+            document.getElementById("code").innerHTML = code;
+            setCookie("code", code, 'biqing.github.io', '/', 24);
         };
 
         var init = function(){
-            var ac = getCookie("ac");
-            if(ac){
-                document.getElementById("access_token").innerHTML = ac;
+            var code = getCookie("code");
+            if(code){
+                document.getElementById("code").innerHTML = code;
             } else {
-                document.getElementById("access_token").innerHTML = "未登录, 或授权已过期";
+                document.getElementById("code").innerHTML = "未登录, 或授权已过期";
             }
         };
 
