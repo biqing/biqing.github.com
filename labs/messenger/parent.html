@@ -37,7 +37,8 @@
     <pre id="output" class="alert alert-warning"></pre>
 </div>
 <script>
-    var messenger = new Messenger('parent', 'MessengerDemo'),
+    // 因为BAE升级3.0, svn还不能正常checkout/commit, 先把projectName设为 '[PROJECT_NAME]'
+    var messenger = new Messenger('parent', '[PROJECT_NAME]'),
         iframe1 = document.getElementById('iframe1'),
         iframe2 = document.getElementById('iframe2'),
         input = document.getElementById('message');
