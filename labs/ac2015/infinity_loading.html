@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title>Loading...</title>
+    <style type="text/css">
+        #content {
+            text-align: center;
+            margin-top: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">载入中，请稍候...</div>
+    <script type="text/javascript">
+        var dom = document.getElementById('content'),
+            ua = navigator.userAgent.toLowerCase(),
+            timeout = 30;
+        var timer = setInterval(function(){
+            if(dom.innerHTML.length === 10){
+                dom.innerHTML = '载入中，请稍候';
+            } else {
+                dom.innerHTML += '.';
+            }
+        }, 500);
+        
+        if(ua.indexOf('iphone') !== -1){
+            timeout = 5;
+        } else if(ua.indexOf('android') !== -1){
+            timeout = 10;
+        }
+
+        setTimeout(function(){
+            clearInterval(timer);
+            dom.innerHTML = '加载完成^_^';
+        }, 1000 * timeout);
+
+    </script>
+</body>
+</html>
