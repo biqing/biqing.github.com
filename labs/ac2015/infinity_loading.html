@@ -28,14 +28,14 @@
         }, 500);
         
         if(ua.indexOf('iphone') !== -1){
-            timeout = 5;
-        } else if(ua.indexOf('android') !== -1){
             timeout = 10;
+        } else if(ua.indexOf('android') !== -1){
+            timeout = 20;
         }
 
         setTimeout(function(){
             clearInterval(timer);
-            dom.innerHTML = '加载完成^_^';
+            dom.innerHTML = '加载完成^_^ (耗时' + timeout + '秒)';
         }, 1000 * timeout);
 
     </script>
